@@ -64,7 +64,7 @@ $spec = @{
     supports_check_mode     = $true
 }
 $module = [AnsibleModule]::Create($args, $spec)
-$result = @{ changed = $false }
+$module.Result.changed = $false
 
 $dest               = $module.Params.dest
 $repo               = $module.Params.repo
@@ -96,5 +96,4 @@ $executable         = if ($module.Params.executable -and (Test-Path -Path $modul
         $module.FailJson($_.Exception.Message)
     }
 }
-$module.Result = $result
 $module.ExitJson()
